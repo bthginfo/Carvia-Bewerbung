@@ -213,7 +213,7 @@ function Hero() {
         <span>Ingolstadt · München</span>
       </div>
       <div className="hero-copy">
-        <p className="eyebrow reveal reveal-2">Servus CarVia.</p>
+        <p className="eyebrow reveal reveal-2">Liebes CarVia-Team,</p>
         <h1 id="hero-title" className="reveal reveal-3">Bilder, die Lust<br />aufs <em>Losfahren</em> machen.</h1>
         <div className="hero-intro reveal reveal-4">
           <p>Ich bin Mario – Filmemacher, Fotograf und Stratege aus Ingolstadt. Ich denke in Geschichten, drehe sie selbst und bringe sie so in Form, dass sie nicht nur gut aussehen, sondern hängen bleiben.</p>
@@ -562,8 +562,10 @@ function CvPage() {
           <img src="/media/mario-contact.jpg" alt="Mario Schubert" />
         </header>
         <a className="cv-digital" href={applicationUrl}>
-          <span>Digitale Bewerbung & ausgewählte Filme</span>
-          <strong>carvia-bewerbung-mario-schubert.vercel.app</strong>
+          <span className="cv-digital-eyebrow">Ergänzung zum Lebenslauf</span>
+          <strong>Digitale Bewerbung & Filmreferenzen ansehen</strong>
+          <span className="cv-digital-descriptor">Ausgewählte Filme, Formatidee und Arbeitsweise</span>
+          <span className="cv-digital-url">carvia-bewerbung-mario-schubert.vercel.app</span>
           <ExternalIcon />
         </a>
         <section className="cv-summary">
