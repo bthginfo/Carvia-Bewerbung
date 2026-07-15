@@ -117,10 +117,10 @@ svg { width: 1.15em; height: 1.15em; fill: none; stroke: currentColor; stroke-wi
 .editorial-link svg { transition: transform .25s ease; }
 .editorial-link:hover svg { transform: translate(4px,-4px); }
 
-.reel { margin-top: clamp(130px, 16vw, 245px); padding-top: 70px; border-top: 1px solid rgba(255,255,255,.24); }
-.reel-heading { display: grid; grid-template-columns: 1fr minmax(230px, 360px); gap: 8vw; align-items: end; margin-bottom: 75px; }
-.reel-heading h3 { margin: 16px 0 0; font-size: clamp(58px, 8vw, 126px); line-height: .78; letter-spacing: -.065em; font-weight: 520; }
-.reel-heading h3 em { color: #d2b37f; font-family: var(--serif); font-weight: 420; }
+.reel-section { color: #f1eee5; background: var(--petrol-deep); }
+.reel-heading { display: grid; grid-template-columns: 1fr minmax(230px, 360px); gap: 8vw; align-items: end; margin: 66px 0 75px; }
+.reel-heading h2 { margin: 16px 0 0; font-size: clamp(58px, 8vw, 126px); line-height: .78; letter-spacing: -.065em; font-weight: 520; }
+.reel-heading h2 em { color: #d2b37f; font-family: var(--serif); font-weight: 420; }
 .reel-heading > p { margin: 0 0 7px; color: rgba(255,255,255,.62); font-size: 13px; line-height: 1.8; }
 .reel-wall { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(24px, 4vw, 66px) 2.5vw; align-items: start; }
 .reel-item-1 { grid-column: 1 / 8; }
@@ -361,9 +361,9 @@ svg { width: 1.15em; height: 1.15em; fill: none; stroke: currentColor; stroke-wi
   .case-portrait { width: 76%; }
   .case-landscape { margin: 0 0 0 16%; }
   .editorial-link { margin-top: 85px; font-size: 15px; }
-  .reel { margin-top: 110px; padding-top: 54px; }
+  .reel-section { padding-top: 78px; padding-bottom: 90px; }
   .reel-heading { grid-template-columns: 1fr; gap: 24px; margin-bottom: 48px; }
-  .reel-heading h3 { font-size: 58px; }
+  .reel-heading h2 { font-size: 58px; }
   .reel-heading > p { max-width: 310px; font-size: 11px; }
   .reel-wall { grid-template-columns: 1fr; gap: 58px; }
   .reel-item-1, .reel-item-2, .reel-item-3, .reel-item-4 { grid-column: 1; margin: 0; }

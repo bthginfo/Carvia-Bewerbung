@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 
 const chapters = [
   { id: 'anfang', label: 'Anfang' },
+  { id: 'filme', label: 'Filme' },
   { id: 'warum', label: 'Warum' },
   { id: 'arbeiten', label: 'Arbeiten' },
   { id: 'idee', label: 'Formatidee' },
@@ -133,7 +134,7 @@ function SiteHeader({ active }: { active: string }) {
             className={active === chapter.id ? 'active' : ''}
             onClick={() => setOpen(false)}
           >
-            <span>{String(index + 1).padStart(2, '0')}</span>{chapter.label}
+            <span>{String(index).padStart(2, '0')}</span>{chapter.label}
           </a>
         ))}
       </nav>
@@ -216,7 +217,7 @@ function Hero() {
         <h1 id="hero-title" className="reveal reveal-3">Bilder, die Lust<br />aufs <em>Losfahren</em> machen.</h1>
         <div className="hero-intro reveal reveal-4">
           <p>Ich bin Mario – Filmemacher, Fotograf und Stratege aus Ingolstadt. Ich denke in Geschichten, drehe sie selbst und bringe sie so in Form, dass sie nicht nur gut aussehen, sondern hängen bleiben.</p>
-          <a href="#arbeiten">Ausgewählte Arbeiten <ArrowIcon /></a>
+          <a href="#filme">Filme ansehen <ArrowIcon /></a>
         </div>
       </div>
       <div className="hero-footer reveal reveal-4">
@@ -234,7 +235,7 @@ function Hero() {
 function Why() {
   return (
     <section id="warum" className="section why-section observe" aria-labelledby="why-title">
-      <div className="section-index"><span>01</span>Warum jetzt</div>
+      <div className="section-index"><span>02</span>Warum jetzt</div>
       <div className="why-grid">
         <div className="why-kicker">
           <span>Seit 03/2023 selbstständig</span>
@@ -256,7 +257,7 @@ function Why() {
 function Work() {
   return (
     <section id="arbeiten" className="section work-section observe" aria-labelledby="work-title">
-      <div className="section-index light"><span>02</span>Selected work</div>
+      <div className="section-index light"><span>03</span>Selected work</div>
       <div className="work-heading">
         <h2 id="work-title">Premium beginnt<br />im <em>Detail.</em></h2>
         <p>Drei Perspektiven auf ein gemeinsames Thema: Begehren entsteht nicht durch Lautstärke, sondern durch den richtigen Moment.</p>
@@ -291,7 +292,6 @@ function Work() {
           <p>Ein leiser Blick auf Produkte, bei denen Präzision sichtbar werden muss.</p>
         </article>
       </div>
-      <VideoReel />
     </section>
   )
 }
@@ -322,11 +322,12 @@ function VideoReel() {
   const closeVideo = () => setActiveVideo(null)
 
   return (
-    <div className="reel" aria-labelledby="reel-title">
+    <section id="filme" className="section reel-section observe" aria-labelledby="reel-title">
+      <div className="section-index light"><span>01</span>Filme</div>
       <div className="reel-heading">
         <div>
-          <span className="case-type">Moving image · 04 Arbeiten</span>
-          <h3 id="reel-title">Ausgewählte<br /><em>Filme.</em></h3>
+          <span className="case-type">Director’s reel · 04 Arbeiten</span>
+          <h2 id="reel-title">Ausgewählte<br /><em>Filme.</em></h2>
         </div>
         <p>Vier Produktionen, vier Tempi. Der Player lädt erst nach einem bewussten Klick.</p>
       </div>
@@ -378,7 +379,7 @@ function VideoReel() {
           </div>
         )}
       </dialog>
-    </div>
+    </section>
   )
 }
 
@@ -396,7 +397,7 @@ function FormatIdea() {
         <img src="/media/motion-poster.jpg" alt="Sportwagen bei einer filmischen Fahrt in alpiner Landschaft" loading="lazy" />
       </div>
       <div className="format-content">
-        <div className="section-index light"><span>03</span>Eine Idee für CarVia</div>
+        <div className="section-index light"><span>04</span>Eine Idee für CarVia</div>
         <p className="proposal-label">Formatvorschlag · YouTube + Social</p>
         <h2 id="format-title"><span>One key.</span><span>One road.</span><span><em>One story.</em></span></h2>
         <p className="format-lead">Jede Folge verbindet ein konkretes Auto, einen Menschen mit einem echten Grund loszufahren und eine Route, die beides zusammenbringt.</p>
@@ -424,7 +425,7 @@ function FormatIdea() {
 function Process() {
   return (
     <section id="prozess" className="section process-section observe" aria-labelledby="process-title">
-      <div className="section-index"><span>04</span>Arbeitsweise</div>
+      <div className="section-index"><span>05</span>Arbeitsweise</div>
       <div className="process-head">
         <h2 id="process-title">Von der Idee<br />bis zur <em>Ausspielung.</em></h2>
         <p>Ich mag kurze Wege, klare Entscheidungen und Produktionen, bei denen alle wissen, welches Bild am Ende entstehen soll.</p>
@@ -447,7 +448,7 @@ function Process() {
 function Vita() {
   return (
     <section id="vita" className="section vita-section observe" aria-labelledby="vita-title">
-      <div className="section-index"><span>05</span>Vita in Bewegung</div>
+      <div className="section-index"><span>06</span>Vita in Bewegung</div>
       <div className="vita-intro">
         <h2 id="vita-title">Kreativ im Bild.<br /><em>Strukturiert</em> dahinter.</h2>
         <div className="vita-facts">
@@ -476,7 +477,7 @@ function Contact() {
         <span>Mario Schubert · Ingolstadt · 2026</span>
       </div>
       <div className="contact-content">
-        <div className="section-index light"><span>06</span>Kontakt</div>
+        <div className="section-index light"><span>07</span>Kontakt</div>
         <p className="contact-kicker">Wenn ihr glaubt, dass das passen könnte:</p>
         <h2 id="contact-title">Lasst uns<br /><em>reden.</em></h2>
         <p>Gern bei einem Kaffee in München, einem Spaziergang in Ingolstadt oder direkt zwischen zwei Autos.</p>
@@ -529,6 +530,7 @@ function MainPage() {
       <SiteHeader active={active} />
       <main id="main">
         <Hero />
+        <VideoReel />
         <Why />
         <Work />
         <FormatIdea />
