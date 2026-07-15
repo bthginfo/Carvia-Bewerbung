@@ -18,7 +18,6 @@ type VideoReference = {
   category: string
   thumbnail: string
   embed: string
-  source: string
 }
 
 const videoReferences: VideoReference[] = [
@@ -27,28 +26,30 @@ const videoReferences: VideoReference[] = [
     category: 'Eventfilm · Automotive · Social',
     thumbnail: '/media/videos/maserati.jpg',
     embed: 'https://drive.google.com/file/d/1VTwYSxYSowiWhvQu3C_fpWoV9vgliYsk/preview',
-    source: 'Google Drive',
   },
   {
     title: 'Aston Martin · DBX 707',
     category: 'Automotive Film · Launch / Experience',
     thumbnail: '/media/videos/aston-dbx.jpg',
     embed: 'https://drive.google.com/file/d/1rzRF8FGjO8SrPf7tegbeYW7VbBmpbYFn/preview',
-    source: 'Google Drive',
   },
   {
     title: 'ADAC GT4 Germany · Red Bull Ring',
     category: 'Motorsport · Long-form / Live Content',
     thumbnail: '/media/videos/adac-gt4.jpg',
     embed: 'https://www.youtube-nocookie.com/embed/xQ6noPM0TS0',
-    source: 'YouTube',
   },
   {
     title: 'The Honourables · Golf & Business Cup',
     category: 'Lifestyle · Eventfilm',
     thumbnail: '/media/videos/the-honourables.jpg',
     embed: 'https://drive.google.com/file/d/1LH989Q6MOTSidqQZzisju0qqdQDrAwig/preview',
-    source: 'Google Drive',
+  },
+  {
+    title: 'Aston Martin x Hollfelder Juwelier – Aftermovie',
+    category: 'Premium Event · Automotive / Jewellery',
+    thumbnail: '/media/videos/aston-hollfelder.jpg',
+    embed: 'https://www.youtube-nocookie.com/embed/dhZtdIx6FDY',
   },
 ]
 
@@ -225,8 +226,8 @@ function Hero() {
           <span className={playing ? 'pause-symbol' : 'play-symbol'} />
           {playing ? 'Pause' : 'Play'}
         </button>
-        <span className="timecode">REC · 00:00:26:12</span>
-        <span className="scroll-cue">Scroll to move <i /></span>
+        <span className="timecode">Film · Foto · Strategie</span>
+        <span className="scroll-cue">Weiter entdecken <i /></span>
       </div>
     </section>
   )
@@ -257,7 +258,7 @@ function Why() {
 function Work() {
   return (
     <section id="arbeiten" className="section work-section observe" aria-labelledby="work-title">
-      <div className="section-index light"><span>03</span>Selected work</div>
+      <div className="section-index light"><span>03</span>Fotografie</div>
       <div className="work-heading">
         <h2 id="work-title">Premium beginnt<br />im <em>Detail.</em></h2>
         <p>Drei Perspektiven auf ein gemeinsames Thema: Begehren entsteht nicht durch Lautstärke, sondern durch den richtigen Moment.</p>
@@ -326,10 +327,10 @@ function VideoReel() {
       <div className="section-index light"><span>01</span>Filme</div>
       <div className="reel-heading">
         <div>
-          <span className="case-type">Director’s reel · 04 Arbeiten</span>
+          <span className="case-type">Filmportfolio · 05 Arbeiten</span>
           <h2 id="reel-title">Ausgewählte<br /><em>Filme.</em></h2>
         </div>
-        <p>Vier Produktionen, vier Tempi. Der Player lädt erst nach einem bewussten Klick.</p>
+        <p>Fünf Produktionen, fünf Tempi. Automotive, Motorsport und Lifestyle – erzählt mit Gefühl für Rhythmus, Licht und Atmosphäre.</p>
       </div>
       <div className="reel-wall">
         {videoReferences.map((video, index) => (
@@ -375,7 +376,7 @@ function VideoReel() {
                 referrerPolicy="strict-origin-when-cross-origin"
               />
             </div>
-            <footer><span>Quelle · {activeVideo.source}</span><span>ESC zum Schließen</span></footer>
+            <footer><span>Ausgewählte Filmreferenz</span><span>Mario Schubert · WYLDWORKS</span></footer>
           </div>
         )}
       </dialog>
@@ -488,7 +489,7 @@ function Contact() {
         <div className="contact-links">
           <a href="https://www.wyldworks.de/" target="_blank" rel="noreferrer">WYLDWORKS <ExternalIcon /></a>
           <a href="https://marioschub.com/" target="_blank" rel="noreferrer">marioschub.com <ExternalIcon /></a>
-          <a href="/cv">CV / Print <ArrowIcon /></a>
+          <a href="/cv">CV ansehen <ArrowIcon /></a>
           <a href="/anschreiben">Anschreiben <ArrowIcon /></a>
         </div>
         <p className="contact-signoff">Bis bald,<br /><span>Mario</span></p>
