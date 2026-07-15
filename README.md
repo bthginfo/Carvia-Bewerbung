@@ -17,7 +17,7 @@ npm run build
 npm run preview
 ```
 
-Die Hauptseite läuft unter `/`, der korrigierte, druckfreundliche Lebenslauf unter `/cv`. In der CV-Ansicht kann über **„CV drucken / als PDF sichern“** der Browser-PDF-Dialog geöffnet werden.
+Die Hauptseite läuft unter `/`, der korrigierte Lebenslauf unter `/cv` und das Anschreiben unter `/anschreiben`. Beide Dokumentansichten bieten eine Druckfunktion und einen direkten Download der final geprüften PDFs.
 
 ## Deployment auf Vercel
 
@@ -29,6 +29,7 @@ Alle Web-Medien werden lokal aus `public/media` ausgeliefert; es gibt keine Bild
 
 - Automotive-Film und Bildmaterial: WYLDWORKS / Mario Schubert
 - Aston Martin Vantage, Aston Martin Ulm, Hollfelder Juwelier: WYLDWORKS / Mario Schubert
+- Maserati Grecale Barbie Event, Aston Martin DBX 707, ADAC GT4 Germany und The Honourables: lokale Vorschaubilder aus dem kuratierten WYLDWORKS-Portfolio; die externen Player werden erst nach einem Klick geladen
 - Mario-Porträt: marioschub.com / Mario Schubert
 
 Die Seite ist eine persönliche Bewerbung und keine offizielle CarVia-Webseite. Marken- und Fahrzeugnamen dienen der Einordnung der gezeigten Referenzen.
@@ -45,6 +46,7 @@ Die Seite ist eine persönliche Bewerbung und keine offizielle CarVia-Webseite. 
 
 ```text
 public/media/   lokale Fotos, Poster und Video
+public/documents/ finaler CV und finales Anschreiben als PDF
 src/App.tsx     Bewerbung und CV-Ansicht
 src/styles.css  Art Direction, Responsive- und Print-Styles
 screenshots/    QA-Screenshots für Desktop und Mobile

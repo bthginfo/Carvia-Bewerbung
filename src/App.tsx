@@ -10,6 +10,47 @@ const chapters = [
   { id: 'kontakt', label: 'Kontakt' },
 ]
 
+const applicationUrl = 'https://carvia-bewerbung-mario-schubert.vercel.app'
+
+type VideoReference = {
+  title: string
+  category: string
+  thumbnail: string
+  embed: string
+  source: string
+}
+
+const videoReferences: VideoReference[] = [
+  {
+    title: 'Maserati · Grecale Barbie Event',
+    category: 'Eventfilm · Automotive · Social',
+    thumbnail: '/media/videos/maserati.jpg',
+    embed: 'https://drive.google.com/file/d/1VTwYSxYSowiWhvQu3C_fpWoV9vgliYsk/preview',
+    source: 'Google Drive',
+  },
+  {
+    title: 'Aston Martin · DBX 707',
+    category: 'Automotive Film · Launch / Experience',
+    thumbnail: '/media/videos/aston-dbx.jpg',
+    embed: 'https://drive.google.com/file/d/1rzRF8FGjO8SrPf7tegbeYW7VbBmpbYFn/preview',
+    source: 'Google Drive',
+  },
+  {
+    title: 'ADAC GT4 Germany · Red Bull Ring',
+    category: 'Motorsport · Long-form / Live Content',
+    thumbnail: '/media/videos/adac-gt4.jpg',
+    embed: 'https://www.youtube-nocookie.com/embed/xQ6noPM0TS0',
+    source: 'YouTube',
+  },
+  {
+    title: 'The Honourables · Golf & Business Cup',
+    category: 'Lifestyle · Eventfilm',
+    thumbnail: '/media/videos/the-honourables.jpg',
+    embed: 'https://drive.google.com/file/d/1LH989Q6MOTSidqQZzisju0qqdQDrAwig/preview',
+    source: 'Google Drive',
+  },
+]
+
 const timeline = [
   {
     date: '03/2023 — heute',
@@ -62,6 +103,14 @@ function ExternalIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M8 16 18 6M10 6h8v8" />
+    </svg>
+  )
+}
+
+function PlayIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="m9 6 9 6-9 6z" />
     </svg>
   )
 }
@@ -242,10 +291,94 @@ function Work() {
           <p>Ein leiser Blick auf Produkte, bei denen Präzision sichtbar werden muss.</p>
         </article>
       </div>
-      <a className="editorial-link" href="https://www.wyldworks.de/" target="_blank" rel="noreferrer">
-        Mehr Arbeiten bei WYLDWORKS <ExternalIcon />
-      </a>
+      <VideoReel />
     </section>
+  )
+}
+
+function VideoReel() {
+  const [activeVideo, setActiveVideo] = useState<VideoReference | null>(null)
+  const dialogRef = useRef<HTMLDialogElement>(null)
+  const lastTriggerRef = useRef<HTMLButtonElement | null>(null)
+
+  useEffect(() => {
+    const dialog = dialogRef.current
+    if (!activeVideo || !dialog) return
+    if (!dialog.open) dialog.showModal()
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      document.body.style.overflow = ''
+      if (dialog.open) dialog.close()
+      lastTriggerRef.current?.focus()
+    }
+  }, [activeVideo])
+
+  const openVideo = (video: VideoReference, trigger: HTMLButtonElement) => {
+    lastTriggerRef.current = trigger
+    setActiveVideo(video)
+  }
+
+  const closeVideo = () => setActiveVideo(null)
+
+  return (
+    <div className="reel" aria-labelledby="reel-title">
+      <div className="reel-heading">
+        <div>
+          <span className="case-type">Moving image · 04 Arbeiten</span>
+          <h3 id="reel-title">Ausgewählte<br /><em>Filme.</em></h3>
+        </div>
+        <p>Vier Produktionen, vier Tempi. Der Player lädt erst nach einem bewussten Klick.</p>
+      </div>
+      <div className="reel-wall">
+        {videoReferences.map((video, index) => (
+          <article className={`reel-item reel-item-${index + 1}`} key={video.title}>
+            <button
+              type="button"
+              className="reel-poster"
+              aria-label={`${video.title} abspielen`}
+              onClick={(event) => openVideo(video, event.currentTarget)}
+            >
+              <img src={video.thumbnail} alt={`Filmstill: ${video.title}`} loading="lazy" />
+              <span className="reel-play"><PlayIcon /><b>Play</b></span>
+              <span className="reel-number">{String(index + 1).padStart(2, '0')}</span>
+            </button>
+            <div className="reel-meta"><h4>{video.title}</h4><p>{video.category}</p></div>
+          </article>
+        ))}
+      </div>
+      <dialog
+        ref={dialogRef}
+        className="video-dialog"
+        aria-labelledby="video-dialog-title"
+        onCancel={(event) => {
+          event.preventDefault()
+          closeVideo()
+        }}
+        onClick={(event) => {
+          if (event.target === dialogRef.current) closeVideo()
+        }}
+      >
+        {activeVideo && (
+          <div className="video-dialog-panel">
+            <header>
+              <div><span>{activeVideo.category}</span><h2 id="video-dialog-title">{activeVideo.title}</h2></div>
+              <button type="button" onClick={closeVideo} aria-label="Videoplayer schließen">Schließen ×</button>
+            </header>
+            <div className="video-frame">
+              <iframe
+                src={activeVideo.embed}
+                title={`${activeVideo.title} – Videoplayer`}
+                allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                allowFullScreen
+                referrerPolicy="strict-origin-when-cross-origin"
+              />
+            </div>
+            <footer><span>Quelle · {activeVideo.source}</span><span>ESC zum Schließen</span></footer>
+          </div>
+        )}
+      </dialog>
+    </div>
   )
 }
 
@@ -355,6 +488,7 @@ function Contact() {
           <a href="https://www.wyldworks.de/" target="_blank" rel="noreferrer">WYLDWORKS <ExternalIcon /></a>
           <a href="https://marioschub.com/" target="_blank" rel="noreferrer">marioschub.com <ExternalIcon /></a>
           <a href="/cv">CV / Print <ArrowIcon /></a>
+          <a href="/anschreiben">Anschreiben <ArrowIcon /></a>
         </div>
         <p className="contact-signoff">Bis bald,<br /><span>Mario</span></p>
       </div>
@@ -411,7 +545,11 @@ function CvPage() {
     <main id="main" className="cv-page">
       <div className="cv-toolbar">
         <a href="/">← Zur Bewerbung</a>
-        <button type="button" onClick={() => window.print()}>CV drucken / als PDF sichern</button>
+        <div>
+          <a href="/anschreiben">Anschreiben</a>
+          <a className="toolbar-download" href="/documents/Mario_Schubert_CV_CarVia.pdf" download>PDF herunterladen ↓</a>
+          <button type="button" onClick={() => window.print()}>Drucken / als PDF sichern</button>
+        </div>
       </div>
       <article className="cv-sheet">
         <header className="cv-header">
@@ -421,6 +559,11 @@ function CvPage() {
           </div>
           <img src="/media/mario-contact.jpg" alt="Mario Schubert" />
         </header>
+        <a className="cv-digital" href={applicationUrl}>
+          <span>Digitale Bewerbung & ausgewählte Filme</span>
+          <strong>carvia-bewerbung-mario-schubert.vercel.app</strong>
+          <ExternalIcon />
+        </a>
         <section className="cv-summary">
           <h2>Profil</h2>
           <div>
@@ -457,13 +600,51 @@ function CvPage() {
           </div>
         </section>
         <footer className="cv-footer">
-          <span>marioschub.com</span><span>wyldworks.de</span><span>Mario Schubert · Ingolstadt</span>
+          <a href="https://marioschub.com/">marioschub.com</a><a href="https://www.wyldworks.de/">wyldworks.de</a><span>Mario Schubert · Ingolstadt</span>
         </footer>
       </article>
     </main>
   )
 }
 
+function CoverLetterPage() {
+  return (
+    <main id="main" className="letter-page">
+      <div className="cv-toolbar letter-toolbar">
+        <a href="/">← Zur Bewerbung</a>
+        <div>
+          <a href="/cv">CV ansehen</a>
+          <a className="toolbar-download" href="/documents/Mario_Schubert_Anschreiben_CarVia.pdf" download>PDF herunterladen ↓</a>
+          <button type="button" onClick={() => window.print()}>Drucken / als PDF sichern</button>
+        </div>
+      </div>
+      <article className="letter-sheet">
+        <header className="letter-head">
+          <div className="wordmark letter-mark"><span>MS</span><i /><b>CV</b></div>
+          <div className="letter-meta"><span>Mario Schubert</span><span>Ingolstadt</span><a href="mailto:servus@marioschub.com">servus@marioschub.com</a><a href="tel:+4915155338029">+49 1515 5338029</a></div>
+        </header>
+        <div className="letter-title">
+          <p>Bewerbung · 07/2026</p>
+          <h1>Bewerbung als Videograf / Filmmaker / <em>Content Creator Video</em></h1>
+        </div>
+        <div className="letter-body">
+          <p>Liebes CarVia-Team,</p>
+          <p>starke Autos sind leicht zu filmen. Schwieriger ist es, daraus Geschichten zu machen, die nach dem letzten Sounddesign nicht wieder verschwinden. Genau das reizt mich an der Rolle bei CarVia.</p>
+          <p>Seit 2023 arbeite ich mit WYLDWORKS selbstständig für mehr als 30 Unternehmen. Ich entwickle Ideen, plane Produktionen, stehe hinter der Kamera und bringe das Material in Schnitt und Postproduktion zusammen. Davor habe ich bei Achtzig20 ein Kreativteam von zwei auf mehr als zehn Menschen mit aufgebaut. Dabei habe ich gelernt: Gute Bilder entstehen nicht nur am Set. Sie brauchen eine klare Idee, ehrliches Feedback und einen Prozess, der auch beim nächsten Dreh noch trägt.</p>
+          <p>An CarVia interessiert mich deshalb nicht nur die Flotte. Mich reizt die Chance, aus einzelnen Produktionen eine wiedererkennbare Welt zu bauen – mit Formaten für YouTube, Social, Website und die besonderen Orte, an denen eure Marke stattfindet. Premium heißt für mich dabei nicht möglichst viel Hochglanz. Es heißt, das richtige Detail zu sehen und ihm Zeit zu geben.</p>
+          <p>Die Selbstständigkeit hat mir viel gegeben: Verantwortung, Tempo und einen ziemlich direkten Blick darauf, was funktioniert. Jetzt möchte ich diese Erfahrung in ein Team einbringen und eine Bildsprache nicht nur für ein Projekt, sondern über Jahre weiterentwickeln. Meine Basis ist Ingolstadt; München und Produktionen unterwegs gehören für mich ganz selbstverständlich dazu.</p>
+          <p>Meine Arbeiten, die Formatidee und den aktuellen CV findet ihr unter:<br /><a className="letter-site" href={applicationUrl}>{applicationUrl}</a></p>
+          <p>Wenn ihr das Gefühl habt, dass das passen könnte, freue ich mich auf ein Gespräch – gern auch direkt über die erste Idee, die wir gemeinsam drehen würden.</p>
+          <p className="letter-signoff">Servus<br /><strong>Mario Schubert</strong></p>
+        </div>
+        <footer className="letter-footer"><span>Mario Schubert · Ingolstadt</span><span>carvia-bewerbung-mario-schubert.vercel.app</span><span>01 / 01</span></footer>
+      </article>
+    </main>
+  )
+}
+
 export function App() {
-  return window.location.pathname.startsWith('/cv') ? <CvPage /> : <MainPage />
+  if (window.location.pathname.startsWith('/anschreiben')) return <CoverLetterPage />
+  if (window.location.pathname.startsWith('/cv')) return <CvPage />
+  return <MainPage />
 }
